@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
+import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+
+import App from './App';
+import reducer from './store';
+import { loadFromLocalStorage, saveToLocalStorage } from './store/persist';
+
+
+const persistedState = loadFromLocalStorage();
+
+// creating the redux store
+const store = configureStore({ reducer, preloadedState: persistedState });
+store.subscribe(() => saveToLocalStorage(store.getState()));
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={ store }>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
