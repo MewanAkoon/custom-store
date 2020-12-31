@@ -7,6 +7,7 @@ import Home from './components/home';
 import NotFound from './components/notFound';
 import Navbar from './components/navbar';
 import Login from './components/login';
+import ViewProduct from './components/viewProduct';
 
 const App = () => {
   // getting the looged in user
@@ -21,6 +22,10 @@ const App = () => {
       </div>
       <div>
         <Switch>
+          <Route
+            path='/product/:id'
+            render={ props => <ViewProduct user={ user } { ...props } /> }
+          />
           <Route path='/not-found' component={ NotFound } />
           <Route
             path='/login'

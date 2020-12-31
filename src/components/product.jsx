@@ -1,10 +1,11 @@
 import React from 'react';
 import logo from '../images/item.png';
+import { Link } from 'react-router-dom';
 
 const getAvailableProducts = quantity =>
 	quantity === 0 ? 'Not Available' : `${quantity} item(s) are in the stock`;
 
-const Product = ({ product }) => {
+const Product = ({ product, user }) => {
 	return (
 		<div className='card mb-2'>
 			<div className='card-body row p-0'>
@@ -21,13 +22,17 @@ const Product = ({ product }) => {
 						{getAvailableProducts(product.quantity)}
 					</small>
 					<div className='d-flex justify-content-end px-4'>
-						<a href='#' className='mr-2'>
+						<Link to={`/product/${product._id}`} className='mr-2'>
 							Details
-						</a>
-						<a href='#' className='mr-2'>
-							Edit
-						</a>
-						<a href='#'>Delete</a>
+						</Link>
+						{user && (
+							<React.Fragment>
+								<Link to={`/product/edit/${product._id}`} className='mr-2'>
+									Edit
+								</Link>
+								<Link to={`/product/delete/${product._id}`}>Delete</Link>
+							</React.Fragment>
+						)}
 					</div>
 				</div>
 			</div>
