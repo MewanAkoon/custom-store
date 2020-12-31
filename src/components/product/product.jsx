@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const getAvailableProducts = quantity =>
 	quantity === 0 ? 'Not Available' : `${quantity} item(s) are in the stock`;
 
-const Product = ({ product, user }) => {
+const Product = ({ product, user, deleteProduct }) => {
 	return (
 		<div className='card mb-2'>
 			<div className='card-body row p-0'>
@@ -30,7 +30,9 @@ const Product = ({ product, user }) => {
 								<Link to={`/product/edit/${product._id}`} className='mr-2'>
 									Edit
 								</Link>
-								<Link to={`/product/delete/${product._id}`}>Delete</Link>
+								<Link to='/home' onClick={() => deleteProduct(product._id)}>
+									Delete
+								</Link>
 							</React.Fragment>
 						)}
 					</div>

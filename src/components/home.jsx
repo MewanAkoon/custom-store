@@ -41,6 +41,15 @@ class Home extends Component {
 		</div>
 	);
 
+	deleteProduct = async id => {
+		try {
+			axios.delete(`/api/products/${id}`);
+			toast.success('Product deleted successfully');
+		} catch (err) {
+			toast.warning(err);
+		}
+	};
+
 	render() {
 		const {
 			products,
@@ -61,7 +70,12 @@ class Home extends Component {
 							<div className='card-header'>Products Overview</div>
 							<div className='card-body'>
 								{products.map(product => (
-									<Product key={product._id} product={product} user={id} />
+									<Product
+										key={product._id}
+										product={product}
+										user={id}
+										deleteProduct={this.deleteProduct}
+									/>
 								))}
 							</div>
 						</div>
