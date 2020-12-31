@@ -9,6 +9,7 @@ import Navbar from './components/navbar';
 import Login from './components/login';
 import ViewProduct from './components/product/viewProduct';
 import EditProduct from './components/product/editProduct';
+import AddProduct from './components/product/addProduct';
 
 const App = () => {
   // getting the looged in user
@@ -26,6 +27,10 @@ const App = () => {
           <Route
             path='/product/edit/:id'
             render={ props => <EditProduct user={ user } { ...props } /> }
+          />
+          <Route
+            path='/product/add/'
+            render={ props => <AddProduct user={ user } { ...props } /> }
           />
           <Route
             path='/product/:id'

@@ -67,7 +67,16 @@ class Home extends Component {
 						this.renderMessage()
 					) : (
 						<div className='card mx-auto' style={{ width: 900 }}>
-							<div className='card-header'>Products Overview</div>
+							<div className='card-header d-flex'>
+								<span className='my-auto font-weight-bold'>
+									Products Overview
+								</span>
+								<button
+									className='btn btn-danger d-flex ml-auto'
+									onClick={() => this.props.history.push('/product/add')}>
+									Add Product
+								</button>
+							</div>
 							<div className='card-body'>
 								{products.map(product => (
 									<Product

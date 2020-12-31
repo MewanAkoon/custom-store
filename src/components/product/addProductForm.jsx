@@ -4,27 +4,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import Form from '../common/form';
-import Loading from '../common/loading';
 
-class ProductForm extends Form {
+class AddProductForm extends Form {
 	state = {
-		data: { name: '', description: '', quantity: 0 },
-		errors: {},
-		loading: true
+		data: { name: '', description: '', quantity: '' },
+		errors: {}
 	};
-
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps !== this.props) this.loadData();
-	}
-
-	loadData() {
-		const { name, description, quantity } = this.props.product;
-		const { data } = { ...this.state };
-		data.name = name;
-		data.description = description;
-		data.quantity = quantity;
-		this.setState({ data, loading: false });
-	}
 
 	schema = Joi.object({
 		name: Joi.string().label('Product Name'),
@@ -34,45 +19,41 @@ class ProductForm extends Form {
 
 	doSubmit = async () => {
 		const { name, description, quantity } = this.state.data;
-		const { _id } = this.props.product;
+		const { id: userId } = this.props.user;
 
 		const body = {
 			name,
 			description,
-			quantity: parseInt(quantity)
+			quantity: parseInt(quantity),
+			userId
 		};
 
-		console.log(body);
-
 		try {
-			await axios.patch(`/api/products/${_id}`, body);
+			await axios.post(`/api/products`, body);
 			this.props.history.push('/home');
-			toast.success('Product updated successfully.');
+			toast.success('Product added successfully.');
 		} catch (err) {
 			const errors = { ...this.state.errors };
-			errors.update = 'Update failed';
+			errors.add = "Couldn't add a product. Operation failed";
 			this.setState({ errors });
 		}
 	};
 
 	render() {
-		const { loading } = this.state;
-		return !loading ? (
+		return (
 			<form onSubmit={this.handleSubmit} className='mx-auto'>
-				{this.state.errors.update && (
+				{this.state.errors.add && (
 					<small className='alert alert-danger d-block mt-0'>
-						{this.state.errors.update}
+						{this.state.errors.add}
 					</small>
 				)}
 				{this.renderInput('name', 'Product Name')(true)}
 				{this.renderTextArea('description', 'Description')}
 				{this.renderInput('quantity', 'Quantity')(false)}
-				{this.renderSubmitButton('Update')}
+				{this.renderSubmitButton('Add')}
 			</form>
-		) : (
-			<Loading />
 		);
 	}
 }
 
-export default ProductForm;
+export default AddProductForm;
