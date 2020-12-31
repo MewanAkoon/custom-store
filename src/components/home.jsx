@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 import Product from './product/product';
 
@@ -47,6 +48,11 @@ class Home extends Component {
 		} = this.state;
 		return (
 			<React.Fragment>
+				<ToastContainer
+					position='top-center'
+					autoClose={2000}
+					hideProgressBar={true}
+				/>
 				<div className='container mt-4'>
 					{products.length === 0 ? (
 						this.renderMessage()

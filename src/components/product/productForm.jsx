@@ -1,8 +1,9 @@
 import React from 'react';
-import Form from '../common/form';
 import Joi from 'joi';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
+import Form from '../common/form';
 import Loading from '../common/loading';
 
 class ProductForm extends Form {
@@ -46,6 +47,7 @@ class ProductForm extends Form {
 		try {
 			await axios.patch(`/api/products/${_id}`, body);
 			this.props.history.push('/home');
+			toast.success('Product updated successfully.');
 		} catch (err) {
 			const errors = { ...this.state.errors };
 			errors.update = 'Update failed';
