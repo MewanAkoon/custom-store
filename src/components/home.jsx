@@ -6,18 +6,38 @@ import Product from './product';
 class Home extends Component {
 	state = { user: {}, products: [] };
 
-	async componentDidMount() {
+	componentDidMount() {
+		this.renderData();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps !== this.props) this.renderData();
+	}
+
+	// calls the backend
+	renderData = async () => {
 		try {
-			const { data: products } = await axios.get('/api/products');
-			console.log(products);
-			this.setState({ user: {}, products });
+			const { user } = this.props;
+			let products = [];
+
+			if (!user.id) {
+				const { data } = await axios.get('/api/products/');
+				products = data;
+			} else {
+				// Gets products created by the user
+				const { data } = await axios.get(`/api/products/user/${user.id}`);
+				products = data;
+			}
+			this.setState({ user, products });
 		} catch (err) {
 			console.log('Error', err);
 		}
-	}
+	};
 
 	renderMessage = () => (
-		<div className='alert alert-primary'>No Products available...</div>
+		<div className='alert alert-primary w-50 text-center mx-auto'>
+			No Products available...
+		</div>
 	);
 
 	render() {

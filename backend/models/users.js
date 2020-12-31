@@ -6,7 +6,8 @@ const schema = new mongoose.Schema({
   lastName: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true, unique: true },
   phone: { type: String, trim: true, required: true, unique: true },
-  address: { type: String, trim: true, required: true }
+  address: { type: String, trim: true, required: true },
+  password: { type: String, required: true }
 });
 
 const User = mongoose.model('User', schema);
@@ -17,7 +18,8 @@ const validate = user => {
     lastName: Joi.string().required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'lk'] } }).required(),
     phone: Joi.string().required().regex(/^[0-9]{9}$/),
-    address: Joi.string().required().min(5).max(50)
+    address: Joi.string().required().min(5).max(50),
+    password: Joi.string().required().min(8),
   });
 
   return schema.validate(user);

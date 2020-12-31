@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 const { User, validate, validateUpdatedUser } = require('../models/users');
 
@@ -32,11 +33,32 @@ router.post('/', async (req, res) => {
   if (error) return res.status(404).send(error.details[0].message);
 
   try {
-    const user = new User(req.body);
+    // hashing the password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const body = { ...req.body };
+    body.password = hashedPassword;
+
+    const user = new User(body);
     await user.save();
-    res.send(user);
+    res.send(body);
   } catch (err) {
     if (err.code === 11000) return res.status(400).send('User Already Exists');
+    res.status(400).send(err);
+  }
+});
+
+// logs in a user
+router.post('/:email/:password', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (!user) return res.status(404).send('User not found...');
+
+    // checks if the passwords are matching
+    if (!await bcrypt.compare(req.params.password, user.password))
+      return res.status(400).send('Not allowed');
+
+    res.send(user);
+  } catch (err) {
     res.status(400).send(err);
   }
 });
