@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Product from './product';
+import Product from './product/product';
 
 class Home extends Component {
 	state = { user: {}, products: [] };

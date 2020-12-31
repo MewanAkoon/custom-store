@@ -80,13 +80,10 @@ class Form extends Component {
 	};
 
 	renderSubmitButton = label => {
-		let btnClasses = 'btn btn-block mt-2 btn-';
-		btnClasses += this.props.user.role === 'medical' ? 'success' : 'primary';
-
 		return (
 			<button
 				disabled={Object.keys(this.validate()).length > 0}
-				className={btnClasses}>
+				className='btn btn-block btn-primary'>
 				{label}
 			</button>
 		);

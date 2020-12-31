@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../images/item.png';
+import logo from '../../images/item.png';
 import { Link } from 'react-router-dom';
 
 const getAvailableProducts = quantity =>

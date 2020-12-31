@@ -22,7 +22,7 @@ class LoginForm extends Form {
 		const { email, password } = this.state.data;
 
 		try {
-			const { data } = await axios.post(`api//users/${email}/${password}`);
+			const { data } = await axios.post(`api/users/${email}/${password}`);
 
 			this.props.dispatch(
 				userLoggedIn({

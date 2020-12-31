@@ -7,7 +7,8 @@ import Home from './components/home';
 import NotFound from './components/notFound';
 import Navbar from './components/navbar';
 import Login from './components/login';
-import ViewProduct from './components/viewProduct';
+import ViewProduct from './components/product/viewProduct';
+import EditProduct from './components/product/editProduct';
 
 const App = () => {
   // getting the looged in user
@@ -22,6 +23,10 @@ const App = () => {
       </div>
       <div>
         <Switch>
+          <Route
+            path='/product/edit/:id'
+            render={ props => <EditProduct user={ user } { ...props } /> }
+          />
           <Route
             path='/product/:id'
             render={ props => <ViewProduct user={ user } { ...props } /> }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import image from '../images/buy-now.webp';
+import image from '../../images/buy-now.webp';
 
 const getQuantity = quantity =>
 	quantity === 0 ? 'Not Available' : `${quantity} item(s) are in the stock`;

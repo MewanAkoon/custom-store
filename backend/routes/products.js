@@ -54,7 +54,10 @@ router.post('/', async (req, res) => {
 // Updates a product
 router.patch('/:id', async (req, res) => {
   const { error } = validateUpdatedProduct(req.body);
-  if (error) return res.status(404).send(error.details[0].message);
+  if (error) {
+    console.log(error);
+    return res.status(404).send(error.details[0].message);
+  }
 
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
