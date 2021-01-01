@@ -42,8 +42,6 @@ class EditProductForm extends Form {
 			quantity: parseInt(quantity)
 		};
 
-		console.log(body);
-
 		try {
 			await axios.patch(`/api/products/${_id}`, body);
 			this.props.history.push('/home');

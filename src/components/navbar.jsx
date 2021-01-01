@@ -26,6 +26,14 @@ const Navbar = ({ user }) => {
 										<i className='fa fa-cog text-white' aria-hidden='true' />
 									}
 									id='dropdown-navbar'>
+									<NavDropdown.Item onClick={() => history.push('/user/edit')}>
+										<i className='fa fa-wrench mr-2' aria-hidden='true' />
+										Update Info
+									</NavDropdown.Item>
+									<NavDropdown.Item onClick={() => dispatch(userLoggedOut())}>
+										<i className='fa fa-trash mr-2' aria-hidden='true' />
+										Delete Account
+									</NavDropdown.Item>
 									<NavDropdown.Item onClick={() => dispatch(userLoggedOut())}>
 										<i className='fa fa-sign-out mr-2' aria-hidden='true' />
 										Logout

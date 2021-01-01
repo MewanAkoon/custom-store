@@ -19,7 +19,6 @@ class Home extends Component {
 	renderData = async () => {
 		try {
 			const { user } = this.props;
-			console.log(user);
 			let products = [];
 
 			if (!user.id) {
@@ -56,6 +55,7 @@ class Home extends Component {
 			products,
 			user: { id }
 		} = this.state;
+
 		return (
 			<React.Fragment>
 				<ToastContainer

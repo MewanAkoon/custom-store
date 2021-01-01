@@ -11,6 +11,7 @@ import ViewProduct from './components/product/viewProduct';
 import EditProduct from './components/product/editProduct';
 import AddProduct from './components/product/addProduct';
 import Signup from './components/singup';
+import EditUser from './components/user/editUser';
 
 const App = () => {
   // getting the looged in user
@@ -25,6 +26,10 @@ const App = () => {
       </div>
       <div>
         <Switch>
+          <Route
+            path='/user/edit'
+            render={ props => <EditUser user={ user } { ...props } /> }
+          />
           <Route
             path='/product/edit/:id'
             render={ props => <EditProduct user={ user } { ...props } /> }
