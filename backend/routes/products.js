@@ -29,7 +29,6 @@ router.get('/:id', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
   try {
     let products = await Product.find({ userId: req.params.id });
-    if (products.length === 0) return res.status(404).send('No products in the database...');
     res.send(products);
   } catch (err) {
     res.status(400).send(err);

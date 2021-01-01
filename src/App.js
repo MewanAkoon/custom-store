@@ -10,6 +10,7 @@ import Login from './components/login';
 import ViewProduct from './components/product/viewProduct';
 import EditProduct from './components/product/editProduct';
 import AddProduct from './components/product/addProduct';
+import Signup from './components/singup';
 
 const App = () => {
   // getting the looged in user
@@ -40,6 +41,10 @@ const App = () => {
           <Route
             path='/login'
             render={ props => <Login user={ user } { ...props } /> }
+          />
+          <Route
+            path='/signup'
+            render={ props => <Signup { ...props } /> }
           />
           <Route
             path='/home'
