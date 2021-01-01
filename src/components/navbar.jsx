@@ -4,6 +4,8 @@ import { userLoggedOut } from '../store/login';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import handleUserDelete from './common/handleUserDelete';
+
 const Navbar = ({ user }) => {
 	const { id, firstName, lastName } = user;
 	const dispatch = useDispatch();
@@ -30,7 +32,8 @@ const Navbar = ({ user }) => {
 										<i className='fa fa-wrench mr-2' aria-hidden='true' />
 										Update Info
 									</NavDropdown.Item>
-									<NavDropdown.Item onClick={() => dispatch(userLoggedOut())}>
+									<NavDropdown.Item
+										onClick={() => handleUserDelete(id, dispatch)}>
 										<i className='fa fa-trash mr-2' aria-hidden='true' />
 										Delete Account
 									</NavDropdown.Item>
