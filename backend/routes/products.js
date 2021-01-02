@@ -7,7 +7,6 @@ const { Product, validate, validateUpdatedProduct } = require('../models/product
 router.get('/', async (req, res) => {
   try {
     let products = await Product.find().populate('userId');
-    if (products.length === 0) return res.status(404).send('No products in the database...');
     res.send(products);
   } catch (err) {
     res.status(400).send(err);

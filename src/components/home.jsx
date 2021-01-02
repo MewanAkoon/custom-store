@@ -22,7 +22,7 @@ class Home extends Component {
 			let products = [];
 
 			if (!user.id) {
-				const { data } = await axios.get('/api/products/');
+				const { data } = await axios.get('/api/products');
 				products = data;
 			} else {
 				// Gets products created by the user
